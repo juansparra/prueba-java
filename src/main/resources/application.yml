@@ -1,0 +1,40 @@
+# configuracion de springboot
+spring:
+  application:
+    name: servicioProductos
+    # configuracion de base de datos h2
+  datasource:
+    url: jdbc:h2:mem:testdb1
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 12345
+    #Configuracion de persistencia JPA
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  h2:
+    console:
+     enabled: true
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    root: info
+    org.springframework.boot.autoconfigure.data.web: info
+    org.hibernate: error
+#CONFIGURACION SERVIDOR EUREKA (SERVICIO DE REGISTRO Y DESCUBRIMIENTO)
+eureka:
+  client:
+    service-url:
+      #URL DEL SERVIDOR EUREKA AL QUE SE REGISTRARA EL CLIENTE
+      defaultZone: http://localhost:8084/eureka/
+  instance:
+    #IDENTIFICADOR  UNICO PARA LA INSTANCIA DE EUREKA BASADO EN EL NOMBRE DEL APLICATIVO
+    instance-id: ${spring.application.name}
+
+server:
+  port: 8090
+

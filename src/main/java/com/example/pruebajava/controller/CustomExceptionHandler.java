@@ -10,17 +10,21 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 @RestController
+// Clase que maneja excepciones personalizadas relacionadas con operaciones en el controlador de productos.
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-
+    // Maneja la excepción cuando no se encuentra un producto.
     @ExceptionHandler(ProductoNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<String> handleProductoNotFoundException(ProductoNotFoundException ex) {
+        // Devuelve una respuesta con el mensaje de la excepción y el código HTTP NOT_FOUND (404).
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    // Maneja la excepción cuando se proporciona un producto inválido.
 
     @ExceptionHandler(InvalidProductoException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleInvalidProductoException(InvalidProductoException ex) {
+        // Devuelve una respuesta con el mensaje de la excepción y el código HTTP BAD_REQUEST (400).
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
